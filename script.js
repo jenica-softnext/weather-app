@@ -9,7 +9,7 @@ const getWeather = function () {
   const city = document.getElementById("city").value;
 
   if (!city) {
-    alert("Please enter a city");
+    alert("町の名前をアルファベットで入力してください");
     return;
   }
 
@@ -22,7 +22,7 @@ const getWeather = function () {
 
 const showTemp = function (data) {
   if (data.cod === "404") {
-    document.querySelector(".err").innerHTML = data.message;
+    document.querySelector(".err").innerHTML = "該当する町の名前が見つかりません";
     document.querySelector(".err").style.display = "block";
     console.log(data.message);
   } else {
