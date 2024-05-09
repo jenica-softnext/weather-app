@@ -102,6 +102,12 @@ body.cold {
   font-size: 50px;
 }
 
+.err {
+  color: red;
+  display: none;
+  font-size: 14px;
+}
+
 #weather-icon {
   display: none;
 }

@@ -10,42 +10,45 @@ const getWeather = function () {
 
   if (!city) {
     alert("Please enter a city");
+    return;
   }
 
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric
   `)
     .then((res) => res.json())
-    .then((data) => {
-      if (data.cod == "404") {
-        alert(data.message);
-      } else {
-        return showTemp(data);
-      }
-    })
-    .catch((err) => console.log(err));
+    .then((data) => showTemp(data))
+    .catch((err) => alert("Error fetching current weather data.", err));
 };
 
 const showTemp = function (data) {
-  const temp = data.main.temp;
-  const place = data.name;
-  const desc = data.weather[0].description;
-  const icon = data.weather[0].icon;
-  temperature.innerHTML = `The weather in ${place} is <span>${temp}°C</span>`;
-  weatherInfo.style.height = "360px";
-  weatherDesc.innerHTML = desc;
-  weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@4x.png`;
+  if (data.cod === "404") {
+    document.querySelector(".err").innerHTML = data.message;
+    document.querySelector(".err").style.display = "block";
+    console.log(data.message);
+  } else {
+    const temp = data.main.temp;
+    const place = data.name;
+    const desc = data.weather[0].description;
+    const icon = data.weather[0].icon;
+    document.querySelector(".err").innerHTML = "";
+    document.querySelector(".err").style.display = "none";
+    temperature.innerHTML = `The weather in ${place} is <span>${temp}°C</span>`;
+    weatherInfo.style.height = "360px";
+    weatherDesc.innerHTML = desc;
+    weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@4x.png`;
 
-  if (temp >= 35) {
-    document.body.classList.add("hot");
-    document.body.classList.remove("warm");
-    document.body.classList.remove("cold");
-  } else if (temp > 20 && temp < 35) {
-    document.body.classList.remove("hot");
-    document.body.classList.add("warm");
-    document.body.classList.remove("cold");
-  } else if (temp <= 20) {
-    document.body.classList.remove("hot");
-    document.body.classList.remove("warm");
-    document.body.classList.add("cold");
+    if (temp >= 35) {
+      document.body.classList.add("hot");
+      document.body.classList.remove("warm");
+      document.body.classList.remove("cold");
+    } else if (temp > 20 && temp < 35) {
+      document.body.classList.remove("hot");
+      document.body.classList.add("warm");
+      document.body.classList.remove("cold");
+    } else if (temp <= 20) {
+      document.body.classList.remove("hot");
+      document.body.classList.remove("warm");
+      document.body.classList.add("cold");
+    }
   }
 };
