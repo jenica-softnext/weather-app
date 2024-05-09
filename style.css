@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to top right, rgb(255, 70, 70), rgb(255, 143, 51));
+  background: #222222;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -24,19 +24,34 @@ body {
   justify-content: center;
 }
 
+body.hot {
+  background: linear-gradient(to top right, rgb(255, 70, 70), rgb(255, 143, 51));
+  transition: 0.8s;
+}
+
+body.warm {
+  background: linear-gradient(to top right, rgb(255, 153, 70), rgb(255, 207, 51));
+  transition: 0.8s;
+}
+
+body.cold {
+  background: linear-gradient(to top right, rgb(70, 98, 255), rgb(51, 231, 255));
+  transition: 0.8s;
+}
+
 .weather-container {
   width: 100%;
   max-width: 500px;
-  height: 200px;
   margin: 0 auto;
   padding: 20px;
-  background: #ffffff73;
+  background: #2e2e2e;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  color: #fff;
 }
 
 .weather-container input {
@@ -49,8 +64,43 @@ body {
 .weather-container button {
   padding: 4px 8px;
   border: none;
-  background: rgb(255, 103, 57);
-  color: #fff;
+  background: #686868;
   border-radius: 3px;
   font-size: inherit;
+  color: #fff;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 0;
+  overflow: hidden;
+  transition: 0.8s;
+}
+
+.temperature {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.temperature span {
+  display: block;
+  font-size: 50px;
+}
+
+#weather-icon {
+  display: none;
 }
